@@ -1,0 +1,50 @@
+<!-- views/index.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>To-Do List</h1>
+    </header>
+    <ul>
+      <% tasks.forEach((task, index) => { %>
+        <li>
+          <span class="task"><%= task %></span>
+          <button class="delete-btn" onclick="deleteTask(<%= index %>)">Delete</button>
+        </li>
+      <% }); %>
+    </ul>
+    <form onsubmit="addTask(event)">
+      <input type="text" id="newTask" name="newTask" placeholder="Add a new task" required>
+      <button type="submit">Add Task</button>
+    </form>
+    <footer class="footer">
+      &copy; 2023 My To-Do List App
+    </footer>
+  </div>
+
+  <script>
+    function deleteTask(index) {
+      if (confirm('Are you sure you want to delete this task?')) {
+        window.location.href = `/deleteTask?taskIndex=${index}`;
+      }
+    }
+
+    function addTask(event) {
+      event.preventDefault();
+      const newTaskInput = document.getElementById('newTask');
+      const newTask = newTaskInput.value.trim();
+
+      if (newTask !== '') {
+        window.location.href = `/addTask?newTask=${encodeURIComponent(newTask)}`;
+      }
+    }
+  </script>
+</body>
+</html>
