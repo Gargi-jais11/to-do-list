@@ -16,7 +16,7 @@
       <% tasks.forEach((task, index) => { %>
         <li>
           <span class="task"><%= task %></span>
-          <button class="delete-btn" onclick="deleteTask(<%= index %>)">Delete</button>
+          <button class="delete-btn" onclick="deleteTask"<%= index %>>Delete</button>
         </li>
       <% }); %>
     </ul>
